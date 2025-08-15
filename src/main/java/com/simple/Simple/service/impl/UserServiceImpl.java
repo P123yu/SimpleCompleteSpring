@@ -1,0 +1,38 @@
+package com.simple.Simple.service.impl;
+
+import com.simple.Simple.co.UserCO;
+import com.simple.Simple.dto.UserDTO;
+import com.simple.Simple.mapper.UserMapper;
+import com.simple.Simple.model.User;
+import com.simple.Simple.repository.UserRepository;
+import com.simple.Simple.service.UserService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.NoSuchElementException;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
+
+    @Override
+    public UserDTO createUser(UserCO userCO) {
+        User user=userMapper.coToEntity(userCO);
+        user=userRepository.save(user);
+        return userMapper.entityToDTO(user);
+    }
+
+    @Override
+    public UserDTO readUser(Long id) {
+        User user=userRepository.findById(id)
+                .orElseThrow(()->new NoSuchElementException("no any user found"));
+        return userMapper.entityToDTO(user);
+    }
+
+
+}
