@@ -5,6 +5,7 @@ import com.simple.Simple.dto.UserDTO;
 import com.simple.Simple.service.UserService;
 import com.simple.Simple.util.Constant;
 import com.simple.Simple.util.ResponseUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping(Constant.CREATE_API)
-    public ResponseEntity<ResponseUtil<UserDTO>>createUser(@RequestBody UserCO userCO){
+    public ResponseEntity<ResponseUtil<UserDTO>>createUser(@Valid @RequestBody UserCO userCO){
         UserDTO userDTO=userService.createUser(userCO);
         ResponseUtil<UserDTO>response=ResponseUtil.<UserDTO>builder()
                 .status(HttpStatus.CREATED.value())
