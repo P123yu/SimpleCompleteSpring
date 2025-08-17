@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -32,6 +33,12 @@ public class UserServiceImpl implements UserService {
         User user=userRepository.findById(id)
                 .orElseThrow(()->new NoSuchElementException("no any user found"));
         return userMapper.entityToDTO(user);
+    }
+
+    @Override
+    public List<UserDTO> readAllUsers() {
+        List<User> userList= userRepository.findAll();
+        return userMapper.entityListToDTOList(userList);
     }
 
 

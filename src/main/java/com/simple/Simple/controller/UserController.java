@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/user")
@@ -37,6 +39,17 @@ public class UserController {
                 .status(HttpStatus.OK.value())
                 .message(Constant.READ)
                 .data(userDTO).build();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+
+    @GetMapping(Constant.READ_API)
+    public ResponseEntity<ResponseUtil<List<UserDTO>>>readAllUsers(){
+        List<UserDTO> userDTOList=userService.readAllUsers();
+        ResponseUtil<List<UserDTO>>response=ResponseUtil.<List<UserDTO>>builder()
+                .status(HttpStatus.OK.value())
+                .message(Constant.READ)
+                .data(userDTOList).build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
