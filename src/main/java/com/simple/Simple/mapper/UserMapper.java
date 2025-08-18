@@ -14,4 +14,7 @@ public interface UserMapper {
     UserDTO entityToDTO(User user);
 
     List<UserDTO> entityListToDTOList(List<User>userList);
+
+    List<User> coListToEntityList(List<UserCO>userCOList);
+
 }

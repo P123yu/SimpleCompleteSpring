@@ -41,5 +41,36 @@ public class UserServiceImpl implements UserService {
         return userMapper.entityListToDTOList(userList);
     }
 
+    @Override
+    public List<UserDTO> createAllUsers(List<UserCO> userCOList) {
+        List<User> userList= userMapper.coListToEntityList(userCOList);
+        userList=userRepository.saveAll(userList);
+        return userMapper.entityListToDTOList(userList);
+    }
+
+    @Override
+    public UserDTO updateUser(UserCO userCO) {
+        Long id= userCO.getId();
+        boolean isUserExists=userRepository.existsById(id);
+        if(!isUserExists){
+           throw new NoSuchElementException("No any user exists with that id "+id);
+        }
+        User user=userMapper.coToEntity(userCO);
+        user = userRepository.save(user);
+        return userMapper.entityToDTO(user);
+    }
+
+
+    @Override
+    public void deleteUserById(Long id) {
+         boolean isUserExists=userRepository.existsById(id);
+         if(isUserExists){
+             userRepository.deleteById(id);
+         }
+         else{
+             throw new NoSuchElementException("No any user exists with that id "+id);
+         }
+    }
+
 
 }

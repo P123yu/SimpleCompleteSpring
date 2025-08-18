@@ -2,6 +2,7 @@ package com.simple.Simple.service;
 
 import com.simple.Simple.co.UserCO;
 import com.simple.Simple.dto.UserDTO;
+import com.simple.Simple.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +19,14 @@ public interface UserService {
     // read all
     List<UserDTO> readAllUsers();
 
-//    List<User>
-
     // create all
+    List<UserDTO> createAllUsers(List<UserCO> userCOList);
+
+    // update user
+    UserDTO updateUser (UserCO userCO);
 
     // delete by id
+    void deleteUserById(Long id);
 
 
 }
