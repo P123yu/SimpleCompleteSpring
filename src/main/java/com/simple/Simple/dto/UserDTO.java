@@ -17,4 +17,8 @@ public class UserDTO extends BaseClass {
     private String city;
 
     private Double marks;
+
+    private String imageName;
+
+    private String imageData;  // because spring will auto convert byte[] to base64
 }

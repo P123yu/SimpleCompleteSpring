@@ -25,4 +25,8 @@ public class User extends BaseClass {
 
     private Double marks;
 
+    private String imageName;
+
+    private byte[] imageData;
+
 }

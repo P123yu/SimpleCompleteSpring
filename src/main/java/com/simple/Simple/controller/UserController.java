@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin
@@ -24,7 +25,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping(Constant.CREATE_API)
-    public ResponseEntity<ResponseUtil<UserDTO>>createUser(@RequestBody @Valid UserCO userCO){
+    public ResponseEntity<ResponseUtil<UserDTO>>createUser(@ModelAttribute @Valid UserCO userCO)throws IOException {
+        System.out.println(userCO);
         UserDTO userDTO=userService.createUser(userCO);
         ResponseUtil<UserDTO>response=ResponseUtil.<UserDTO>builder()
                 .status(HttpStatus.CREATED.value())

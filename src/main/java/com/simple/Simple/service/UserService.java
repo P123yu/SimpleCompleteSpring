@@ -5,6 +5,7 @@ import com.simple.Simple.dto.UserDTO;
 import com.simple.Simple.model.User;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -13,7 +14,7 @@ public interface UserService {
     // NORMAL CRUD ===========================================
 
     // create
-    UserDTO createUser(UserCO userCO);
+    UserDTO createUser(UserCO userCO) throws IOException;
 
     // read by id
     UserDTO readUser(Long id);

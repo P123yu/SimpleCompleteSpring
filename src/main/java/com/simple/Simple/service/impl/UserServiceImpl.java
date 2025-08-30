@@ -10,7 +10,10 @@ import com.simple.Simple.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -24,8 +27,11 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
 
     @Override
-    public UserDTO createUser(UserCO userCO) {
+    public UserDTO createUser(UserCO userCO) throws IOException {
         User user=userMapper.coToEntity(userCO);
+        MultipartFile file=Optional.ofNullable(userCO).map(UserCO::getImageFile).orElse(null);
+        user.setImageName(file !=null ? file.getOriginalFilename() : "");
+        user.setImageData(file !=null ? file.getBytes() : null);
         user=userRepository.save(user);
         return userMapper.entityToDTO(user);
     }
