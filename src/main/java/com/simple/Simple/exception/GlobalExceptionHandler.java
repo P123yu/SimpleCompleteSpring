@@ -22,6 +22,7 @@ public class GlobalExceptionHandler {
 
         ResponseUtil<Object> response = ResponseUtil.builder()
                 .status(status)
+                .success(false)
                 .message(message)
                 .data(null)
                 .build();

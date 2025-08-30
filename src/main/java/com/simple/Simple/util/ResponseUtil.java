@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseUtil<T> {
     private int status;
+    private Boolean success;
     private String message;
     private T data;
 }

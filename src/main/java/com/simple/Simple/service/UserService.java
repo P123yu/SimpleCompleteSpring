@@ -10,6 +10,8 @@ import java.util.List;
 @Service
 public interface UserService {
 
+    // NORMAL CRUD ===========================================
+
     // create
     UserDTO createUser(UserCO userCO);
 
@@ -27,6 +29,17 @@ public interface UserService {
 
     // delete by id
     void deleteUserById(Long id);
+
+    // CUSTOM CRUD =================================================
+
+    // find by city
+    UserDTO readUserByCity(String city);
+
+    // delete by city
+    void deleteUserByCity(String city);
+
+
+
 
 
 }

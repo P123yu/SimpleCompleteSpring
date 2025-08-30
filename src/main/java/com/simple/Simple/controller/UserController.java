@@ -28,6 +28,7 @@ public class UserController {
         UserDTO userDTO=userService.createUser(userCO);
         ResponseUtil<UserDTO>response=ResponseUtil.<UserDTO>builder()
                 .status(HttpStatus.CREATED.value())
+                .success(true)
                 .message(Constant.CREATE)
                 .data(userDTO).build();
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -39,6 +40,7 @@ public class UserController {
         UserDTO userDTO=userService.readUser(userId);
         ResponseUtil<UserDTO>response=ResponseUtil.<UserDTO>builder()
                 .status(HttpStatus.OK.value())
+                .success(true)
                 .message(Constant.READ)
                 .data(userDTO).build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -50,6 +52,7 @@ public class UserController {
         List<UserDTO> userDTOList=userService.readAllUsers();
         ResponseUtil<List<UserDTO>>response=ResponseUtil.<List<UserDTO>>builder()
                 .status(HttpStatus.OK.value())
+                .success(true)
                 .message(Constant.READ)
                 .data(userDTOList).build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -61,6 +64,7 @@ public class UserController {
         List<UserDTO> userDTOList=userService.createAllUsers(userCOList);
         ResponseUtil<List<UserDTO>>response=ResponseUtil.<List<UserDTO>>builder()
                 .status(HttpStatus.CREATED.value())
+                .success(true)
                 .message(Constant.CREATE)
                 .data(userDTOList).build();
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -73,6 +77,7 @@ public class UserController {
         UserDTO userDTO=userService.updateUser(userCO);
         ResponseUtil<UserDTO>response=ResponseUtil.<UserDTO>builder()
                 .status(HttpStatus.OK.value())
+                .success(true)
                 .message(Constant.UPDATE)
                 .data(userDTO).build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -84,6 +89,31 @@ public class UserController {
         userService.deleteUserById(userId);
         ResponseUtil<Void>response=ResponseUtil.<Void>builder()
                 .status(HttpStatus.OK.value())
+                .success(true)
+                .message(Constant.DELETE)
+                .build();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+
+    @GetMapping(Constant.READ_API+"/city/{city}")
+    public ResponseEntity<ResponseUtil<UserDTO>>readUserByCity(@PathVariable String city){
+        UserDTO userDTO=userService.readUserByCity(city);
+        ResponseUtil<UserDTO>response=ResponseUtil.<UserDTO>builder()
+                .status(HttpStatus.OK.value())
+                .success(true)
+                .message(Constant.READ)
+                .data(userDTO).build();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+
+    @DeleteMapping(Constant.DELETE_API+"/city/{city}")
+    public ResponseEntity<ResponseUtil<Void>>deleteUserByCity(@PathVariable String city){
+        userService.deleteUserByCity(city);
+        ResponseUtil<Void>response=ResponseUtil.<Void>builder()
+                .status(HttpStatus.OK.value())
+                .success(true)
                 .message(Constant.DELETE)
                 .build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
